@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -23,8 +24,6 @@ class BaseActivity : AppCompatActivity(),
 
     private var _onClickGridView: (() -> Unit)? = null
     private var _onClickSortView: (() -> Unit)? = null
-
-    private val viewModel: BaseViewModel by viewModels()
     private lateinit var navController: NavController
     private lateinit var binding: ActivityBaseBinding
 
@@ -33,24 +32,21 @@ class BaseActivity : AppCompatActivity(),
         binding = ActivityBaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bindView()
-        bindObserver()
     }
 
     private fun bindView() {
         val host = supportFragmentManager.findFragmentById(R.id.nav_host_main) as NavHostFragment
         navController = host.navController
         navController.addOnDestinationChangedListener(this)
-        NavigationUI.setupWithNavController(binding.toolbar, navController)
+        val appBar = AppBarConfiguration(
+            setOf(
+                R.id.onBoarding1Fragment,
+                R.id.onBoarding2Fragment,
+                R.id.homeFragment
+            )
+        )
+        NavigationUI.setupWithNavController(binding.toolbar, navController, appBar)
         binding.toolbar.setOnMenuItemClickListener(this)
-    }
-
-    private fun bindObserver() {
-        lifecycleScope.launch {
-            viewModel.title.collect {
-                binding.toolbar.title = it
-                binding.collapseToolbar.title = it
-            }
-        }
     }
 
     fun onClickGridView(listener: () -> Unit) {
@@ -59,6 +55,11 @@ class BaseActivity : AppCompatActivity(),
 
     fun onClickSortView(listener: () -> Unit) {
         _onClickSortView = listener
+    }
+
+    fun setTitle(newTitle: String) {
+        binding.toolbar.title = newTitle
+        binding.collapseToolbar.title = newTitle
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -70,11 +71,28 @@ class BaseActivity : AppCompatActivity(),
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        binding.toolbar.menu.findItem(R.id.grid_view).isVisible =
-            destination.id == R.id.homeFragment || destination.id == R.id.detailFragment
-        binding.toolbar.menu.findItem(R.id.sort_view).isVisible =
-            destination.id == R.id.homeFragment || destination.id == R.id.detailFragment
-        binding.appBar.isVisible = destination.id != R.id.googleFragment
+        when (destination.id) {
+            R.id.onBoarding1Fragment -> {
+                binding.collapseToolbar.isVisible = false
+            }
+            R.id.onBoarding2Fragment -> {
+                binding.collapseToolbar.isVisible = false
+            }
+            R.id.homeFragment -> {
+                binding.collapseToolbar.isVisible = true
+                binding.toolbar.menu.findItem(R.id.grid_view).isVisible = true
+                binding.toolbar.menu.findItem(R.id.sort_view).isVisible = true
+            }
+            R.id.detailFragment -> {
+                binding.collapseToolbar.isVisible = true
+                binding.toolbar.menu.findItem(R.id.grid_view).isVisible = true
+                binding.toolbar.menu.findItem(R.id.sort_view).isVisible = true
+            }
+            R.id.googleFragment -> {
+                binding.collapseToolbar.isVisible = false
+            }
+            else -> {}
+        }
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {

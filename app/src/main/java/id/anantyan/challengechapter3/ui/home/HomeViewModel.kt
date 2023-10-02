@@ -23,12 +23,10 @@ class HomeViewModel : ViewModel() {
     val toggleSort: StateFlow<Boolean> = _toggleSort.asStateFlow()
 
     fun getAll(sort: Boolean) = viewModelScope.launch {
-        repository.listAlphabet().collect {
-            if (sort) {
-                _getAll.value = it.sortedByDescending { it.key }
-            } else {
-                _getAll.value = it.sortedBy { it.key }
-            }
+        if (sort) {
+            _getAll.value = repository.listAlphabet().sortedByDescending { it.key }
+        } else {
+            _getAll.value = repository.listAlphabet().sortedBy { it.key }
         }
     }
 

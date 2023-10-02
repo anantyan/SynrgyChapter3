@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/onboarding_2"
+    android:transitionName="@string/transform_onboardin1"
+    tools:context=".ui.onboarding_2.OnBoarding2Fragment">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/abril_fatface"
+        android:text="@string/on_boarding"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+        android:textColor="@color/md_theme_light_onSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_single"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginTop="32dp"
+        android:text="Single Activity"
+        android:textColor="@color/md_theme_light_onSecondary"
+        android:transitionName="@string/transtorm_home"
+        app:cornerRadius="8dp"
+        app:icon="@drawable/baseline_filter_1_24"
+        app:iconTint="@color/md_theme_light_onSecondary"
+        app:layout_constraintEnd_toStartOf="@+id/btn_non_single"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:strokeColor="@color/md_theme_light_onSecondary" />
+
+    <Button
+        android:id="@+id/btn_non_single"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginTop="32dp"
+        android:text="Non Single Activity"
+        android:textColor="@color/md_theme_light_onSecondary"
+        app:cornerRadius="8dp"
+        app:icon="@drawable/baseline_filter_none_24"
+        app:iconTint="@color/md_theme_light_onSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_single"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:strokeColor="@color/md_theme_light_onSecondary" />
+</androidx.constraintlayout.widget.ConstraintLayout>

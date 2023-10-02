@@ -2,7 +2,9 @@ package id.anantyan.challengechapter3.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
 import id.anantyan.challengechapter3.databinding.ListItemBaseBinding
@@ -47,7 +49,16 @@ class HomeAdapter : ListAdapter<AlphabetModel, HomeAdapter.KeyModelViewHolder>(K
         }
 
         fun bindItem(item: AlphabetModel) {
+            val adapter = HomeChildAdapter()
+
             binding.txtAbjad.text = item.key
+            binding.rvChild.setHasFixedSize(true)
+            binding.rvChild.itemAnimator = DefaultItemAnimator()
+            binding.rvChild.layoutManager = LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
+            binding.rvChild.adapter = adapter
+
+            adapter.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            adapter.submitList(item.list)
         }
     }
 

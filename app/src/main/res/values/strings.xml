@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Key List</string>
-    <string name="sub_title">Challenge Chapter 3</string>
+    <string name="app_name">Dictionary Apps</string>
     <string name="change_grid">Change to Grid View</string>
     <string name="change_sort">Change to Sort View</string>
+    <string name="on_boarding">Welcome to\nDictionary</string>
+    <string name="transform_onboardin1">Transition to OnBoarding 1</string>
+    <string name="transtorm_home">Transition to Home</string>
 </resources>
