@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="id.anantyan.challengechapter3.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -17,13 +17,12 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="id.anantyan.challengechapter3.ui.detail.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="key"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/googleFragment"
@@ -33,8 +32,8 @@
     <fragment
         android:id="@+id/onBoarding1Fragment"
         android:name="id.anantyan.challengechapter3.ui.onboarding_1.OnBoarding1Fragment"
-        android:label="fragment_on_boarding1"
-        tools:layout="@layout/fragment_on_boarding1" >
+        android:label="On Boarding 1"
+        tools:layout="@layout/fragment_on_boarding1">
         <action
             android:id="@+id/action_onBoarding1Fragment_to_onBoarding2Fragment"
             app:destination="@id/onBoarding2Fragment"
@@ -44,8 +43,8 @@
     <fragment
         android:id="@+id/onBoarding2Fragment"
         android:name="id.anantyan.challengechapter3.ui.onboarding_2.OnBoarding2Fragment"
-        android:label="fragment_on_boarding2"
-        tools:layout="@layout/fragment_on_boarding2" >
+        android:label="On Boarding 2"
+        tools:layout="@layout/fragment_on_boarding2">
         <action
             android:id="@+id/action_onBoarding2Fragment_to_homeFragment"
             app:destination="@id/homeFragment" />

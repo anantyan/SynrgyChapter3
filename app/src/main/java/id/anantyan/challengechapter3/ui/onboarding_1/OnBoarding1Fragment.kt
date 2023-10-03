@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.androidpoet.metaphor.hold
 import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.databinding.FragmentOnBoarding1Binding
 
@@ -26,8 +27,9 @@ class OnBoarding1Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnNext.transitionName = getString(R.string.transform_onboardin2)
         binding.btnNext.setOnClickListener {
-            val extras = FragmentNavigatorExtras(binding.btnNext to getString(R.string.transform_onboardin1))
+            val extras = FragmentNavigatorExtras(binding.btnNext to getString(R.string.transform_onboardin2))
             val destination = OnBoarding1FragmentDirections.actionOnBoarding1FragmentToOnBoarding2Fragment()
             findNavController().navigate(destination, extras)
         }

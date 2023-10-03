@@ -22,7 +22,7 @@ class HomeViewModel : ViewModel() {
     val toggleGrid: StateFlow<Boolean> = _toggleGrid.asStateFlow()
     val toggleSort: StateFlow<Boolean> = _toggleSort.asStateFlow()
 
-    fun getAll(sort: Boolean) = viewModelScope.launch {
+    fun getAll(sort: Boolean) {
         if (sort) {
             _getAll.value = repository.listAlphabet().sortedByDescending { it.key }
         } else {
@@ -30,11 +30,11 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun toggleGrid() = viewModelScope.launch {
+    fun toggleGrid() {
         _toggleGrid.value = !_toggleGrid.value
     }
 
-    fun toggleSort() = viewModelScope.launch {
+    fun toggleSort() {
         _toggleSort.value = !_toggleSort.value
     }
 }

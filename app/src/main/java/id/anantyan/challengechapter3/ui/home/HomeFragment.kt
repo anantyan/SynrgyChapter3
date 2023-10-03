@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.androidpoet.metaphor.hold
 import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.FragmentHomeBinding
 import id.anantyan.challengechapter3.ui.base.BaseActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -31,12 +34,14 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.root.transitionName = getString(R.string.transform_home)
+        doMaterialMotion(binding.root, getString(R.string.transform_home))
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        doMaterialMotion(view, R.string.transtorm_home)
+        hold()
         bindView()
         bindObserver()
     }
@@ -70,11 +75,13 @@ class HomeFragment : Fragment() {
         binding.rvList.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.rvList.adapter = adapter
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        adapter.onClick { _, item ->
-            Toast.makeText(requireContext(), item.key, Toast.LENGTH_LONG).show()
+        adapter.onClick { _, item, view ->
+            val extras = FragmentNavigatorExtras(view to (item.key ?: ""))
+            val destination = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.key)
+            findNavController().navigate(destination, extras)
         }
 
-        (activity as BaseActivity).setTitle(getString(R.string.app_name) + " - Home")
+        (activity as BaseActivity).setTitle(getString(R.string.app_name))
         (activity as BaseActivity).onClickGridView { viewModel.toggleGrid() }
         (activity as BaseActivity).onClickSortView { viewModel.toggleSort() }
     }

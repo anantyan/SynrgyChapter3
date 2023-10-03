@@ -41,8 +41,7 @@ class BaseActivity : AppCompatActivity(),
         val appBar = AppBarConfiguration(
             setOf(
                 R.id.onBoarding1Fragment,
-                R.id.onBoarding2Fragment,
-                R.id.homeFragment
+                R.id.onBoarding2Fragment
             )
         )
         NavigationUI.setupWithNavController(binding.toolbar, navController, appBar)

@@ -8,11 +8,11 @@ import com.androidpoet.metaphor.MetaphorFragment
 import com.google.android.material.transition.MaterialArcMotion
 import id.anantyan.challengechapter3.R
 
-fun Fragment.doMaterialMotion(view: View, @StringRes id: Int) {
+fun Fragment.doMaterialMotion(view: View, transitionName: String) {
     val metaphor = MetaphorFragment.Builder(this)
         .setExitDuration(resources.getInteger(R.integer.motion_duration_large).toLong())
         .setView(view)
-        .setTransitionName(getString(id))
+        .setTransitionName(transitionName)
         .setExitAnimation(MetaphorAnimation.ContainerTransform)
         .setMotion(MaterialArcMotion())
         .build()
