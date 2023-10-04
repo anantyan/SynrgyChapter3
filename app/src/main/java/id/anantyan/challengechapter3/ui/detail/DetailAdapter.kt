@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import id.anantyan.challengechapter3.databinding.ListItemDetailBinding
 import id.anantyan.challengechapter3.databinding.ListItemHomeBinding
 import id.anantyan.challengechapter3.model.WordsModel
+import id.anantyan.challengechapter3.ui.home.HomeInteraction
 
 class DetailAdapter : ListAdapter<WordsModel, DetailAdapter.KeyModelViewHolder>(KeyModelComparator) {
 
-    private var _onClick: ((position: Int, item: WordsModel) -> Unit)? = null
+    private var _onInteraction: DetailInteraction? = null
 
     private object KeyModelComparator : DiffUtil.ItemCallback<WordsModel>() {
         override fun areItemsTheSame(oldItem: WordsModel, newItem: WordsModel): Boolean {
@@ -42,8 +43,8 @@ class DetailAdapter : ListAdapter<WordsModel, DetailAdapter.KeyModelViewHolder>(
         RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnClickListener {
-                _onClick?.let {
-                    it(bindingAdapterPosition, getItem(bindingAdapterPosition))
+                _onInteraction?.let {
+                    it.onClick(bindingAdapterPosition, getItem(bindingAdapterPosition))
                 }
             }
         }
@@ -53,7 +54,7 @@ class DetailAdapter : ListAdapter<WordsModel, DetailAdapter.KeyModelViewHolder>(
         }
     }
 
-    fun onClick(listener: (position: Int, item: WordsModel) -> Unit) {
-        _onClick = listener
+    fun onInteraction(listener: DetailInteraction) {
+        _onInteraction = listener
     }
 }

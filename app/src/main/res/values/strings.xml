@@ -5,4 +5,5 @@
     <string name="on_boarding">Welcome to\nDictionary</string>
     <string name="transform_onboardin2">Transition to OnBoarding 1</string>
     <string name="transform_home">Transition to Home</string>
+    <string name="transform_home_collapse_toolbar">Transition to Home with Collapse Toolbar</string>
 </resources>

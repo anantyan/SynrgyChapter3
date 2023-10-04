@@ -1,20 +1,18 @@
 package id.anantyan.challengechapter3.ui.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import id.anantyan.challengechapter3.databinding.ListItemHomeBinding
 import id.anantyan.challengechapter3.model.AlphabetModel
 
 class HomeAdapter : ListAdapter<AlphabetModel, HomeAdapter.KeyModelViewHolder>(KeyModelComparator) {
 
-    private var _onClick: ((position: Int, item: AlphabetModel, view: View) -> Unit)? = null
+    private var _onInteraction: HomeInteraction? = null
 
     private object KeyModelComparator : DiffUtil.ItemCallback<AlphabetModel>() {
         override fun areItemsTheSame(oldItem: AlphabetModel, newItem: AlphabetModel): Boolean {
@@ -45,8 +43,8 @@ class HomeAdapter : ListAdapter<AlphabetModel, HomeAdapter.KeyModelViewHolder>(K
 
         init {
             itemView.setOnClickListener {
-                _onClick?.let {
-                    it(bindingAdapterPosition, getItem(bindingAdapterPosition), binding.root)
+                _onInteraction?.let {
+                    it.onClick(bindingAdapterPosition, getItem(bindingAdapterPosition), binding.root)
                 }
             }
         }
@@ -66,7 +64,7 @@ class HomeAdapter : ListAdapter<AlphabetModel, HomeAdapter.KeyModelViewHolder>(K
         }
     }
 
-    fun onClick(listener: (position: Int, item: AlphabetModel, view: View) -> Unit) {
-        _onClick = listener
+    fun onInteraction(listener: HomeInteraction) {
+        _onInteraction = listener
     }
 }

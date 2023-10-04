@@ -5,6 +5,6 @@ import id.anantyan.challengechapter3.model.WordsModel
 import kotlinx.coroutines.flow.Flow
 
 interface BaseRepository {
-    fun listAlphabet(): List<AlphabetModel>
+    suspend fun listAlphabet(): List<AlphabetModel>
     fun listWord(key: String): List<WordsModel>
 }

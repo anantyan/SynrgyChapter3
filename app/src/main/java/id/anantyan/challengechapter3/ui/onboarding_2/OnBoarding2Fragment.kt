@@ -3,6 +3,7 @@ package id.anantyan.challengechapter3.ui.onboarding_2
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -13,7 +14,7 @@ import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.FragmentOnBoarding2Binding
 
-class OnBoarding2Fragment : Fragment() {
+class OnBoarding2Fragment : Fragment(), OnClickListener {
 
     private var _binding: FragmentOnBoarding2Binding? = null
     private val binding get() = _binding!!
@@ -32,16 +33,22 @@ class OnBoarding2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hold()
+        bindView()
+    }
+
+    private fun bindView() {
         binding.btnNext.transitionName = getString(R.string.transform_home)
-        binding.btnNext.setOnClickListener {
-            val extras = FragmentNavigatorExtras(binding.btnNext to getString(R.string.transform_home))
-            val destination = OnBoarding2FragmentDirections.actionOnBoarding2FragmentToHomeFragment()
-            findNavController().navigate(destination, extras)
-        }
+        binding.btnNext.setOnClickListener(this)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(v: View?) {
+        val extras = FragmentNavigatorExtras(binding.btnNext to getString(R.string.transform_home))
+        val destination = OnBoarding2FragmentDirections.actionOnBoarding2FragmentToHomeFragment()
+        findNavController().navigate(destination, extras)
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,14 +15,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androidpoet.metaphor.hold
 import id.anantyan.challengechapter3.R
+import id.anantyan.challengechapter3.common.Resource
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.FragmentHomeBinding
+import id.anantyan.challengechapter3.model.AlphabetModel
 import id.anantyan.challengechapter3.ui.base.BaseActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
+import id.anantyan.challengechapter3.ui.base.BaseInteraction
 import kotlinx.coroutines.launch
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),
+    HomeInteraction,
+    BaseInteraction {
 
     private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
@@ -50,8 +54,16 @@ class HomeFragment : Fragment() {
         viewModel.getAll(false)
 
         lifecycleScope.launch {
-            viewModel.getAll.collect { list ->
-                adapter.submitList(list)
+            viewModel.getAll.collect { resource ->
+                when (resource) {
+                    is Resource.Loading -> {
+                        binding.progressBar.isVisible = true
+                    }
+                    is Resource.Success -> {
+                        binding.progressBar.isVisible = false
+                        adapter.submitList(resource.data)
+                    }
+                }
             }
         }
 
@@ -75,19 +87,26 @@ class HomeFragment : Fragment() {
         binding.rvList.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.rvList.adapter = adapter
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        adapter.onClick { _, item, view ->
-            val extras = FragmentNavigatorExtras(view to (item.key ?: ""))
-            val destination = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.key)
-            findNavController().navigate(destination, extras)
-        }
-
-        (activity as BaseActivity).setTitle(getString(R.string.app_name))
-        (activity as BaseActivity).onClickGridView { viewModel.toggleGrid() }
-        (activity as BaseActivity).onClickSortView { viewModel.toggleSort() }
+        adapter.onInteraction(this)
+        (requireActivity() as BaseActivity).onInteraction(this)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(position: Int, item: AlphabetModel, view: View) {
+        val extras = FragmentNavigatorExtras(view to (item.key ?: ""))
+        val destination = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.key)
+        findNavController().navigate(destination, extras)
+    }
+
+    override fun onClickGridView() {
+        viewModel.toggleGrid()
+    }
+
+    override fun onClickSortView() {
+        viewModel.toggleSort()
     }
 }

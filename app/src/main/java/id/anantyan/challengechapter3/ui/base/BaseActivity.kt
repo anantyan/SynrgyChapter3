@@ -1,29 +1,24 @@
 package id.anantyan.challengechapter3.ui.base
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.color.MaterialColors
-import com.google.android.material.shape.MaterialShapeDrawable
 import id.anantyan.challengechapter3.R
+import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.ActivityBaseBinding
-import kotlinx.coroutines.launch
 
 class BaseActivity : AppCompatActivity(),
     NavController.OnDestinationChangedListener,
     Toolbar.OnMenuItemClickListener {
 
-    private var _onClickGridView: (() -> Unit)? = null
-    private var _onClickSortView: (() -> Unit)? = null
+    private var _onInteraction: BaseInteraction? = null
     private lateinit var navController: NavController
     private lateinit var binding: ActivityBaseBinding
 
@@ -35,6 +30,11 @@ class BaseActivity : AppCompatActivity(),
     }
 
     private fun bindView() {
+        setUpNavigation()
+        setUpAppBar(false)
+    }
+
+    private fun setUpNavigation() {
         val host = supportFragmentManager.findFragmentById(R.id.nav_host_main) as NavHostFragment
         navController = host.navController
         navController.addOnDestinationChangedListener(this)
@@ -44,21 +44,27 @@ class BaseActivity : AppCompatActivity(),
                 R.id.onBoarding2Fragment
             )
         )
-        NavigationUI.setupWithNavController(binding.toolbar, navController, appBar)
         binding.toolbar.setOnMenuItemClickListener(this)
+        NavigationUI.setupWithNavController(
+            binding.collapseToolbar,
+            binding.toolbar,
+            navController,
+            appBar
+        )
     }
 
-    fun onClickGridView(listener: () -> Unit) {
-        _onClickGridView = listener
+    private fun setUpMenuItem(bool: Boolean = false) {
+        binding.toolbar.menu.findItem(R.id.grid_view).isVisible = bool
+        binding.toolbar.menu.findItem(R.id.sort_view).isVisible = bool
     }
 
-    fun onClickSortView(listener: () -> Unit) {
-        _onClickSortView = listener
+    private fun setUpAppBar(bool: Boolean = false) {
+        binding.collapseToolbar.isVisible = bool
+        binding.toolbar.isVisible = bool
     }
 
-    fun setTitle(newTitle: String) {
-        binding.toolbar.title = newTitle
-        binding.collapseToolbar.title = newTitle
+    fun onInteraction(listener: BaseInteraction) {
+        _onInteraction = listener
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -72,23 +78,26 @@ class BaseActivity : AppCompatActivity(),
     ) {
         when (destination.id) {
             R.id.onBoarding1Fragment -> {
-                binding.collapseToolbar.isVisible = false
+                setUpMenuItem(false)
+                setUpAppBar(false)
             }
             R.id.onBoarding2Fragment -> {
-                binding.collapseToolbar.isVisible = false
+                setUpMenuItem(false)
+                setUpAppBar(false)
             }
             R.id.homeFragment -> {
-                binding.collapseToolbar.isVisible = true
-                binding.toolbar.menu.findItem(R.id.grid_view).isVisible = true
-                binding.toolbar.menu.findItem(R.id.sort_view).isVisible = true
+                binding.collapseToolbar.doMaterialMotion(binding.appBar)
+                setUpMenuItem(true)
+                setUpAppBar(true)
             }
             R.id.detailFragment -> {
-                binding.collapseToolbar.isVisible = true
-                binding.toolbar.menu.findItem(R.id.grid_view).isVisible = true
-                binding.toolbar.menu.findItem(R.id.sort_view).isVisible = true
+                binding.collapseToolbar.doMaterialMotion(binding.appBar)
+                setUpMenuItem(true)
+                setUpAppBar(true)
             }
             R.id.googleFragment -> {
-                binding.collapseToolbar.isVisible = false
+                setUpMenuItem(false)
+                setUpAppBar(false)
             }
             else -> {}
         }
@@ -97,14 +106,14 @@ class BaseActivity : AppCompatActivity(),
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.grid_view -> {
-                _onClickGridView?.invoke()
-                true
+                _onInteraction?.onClickGridView()
+                false
             }
             R.id.sort_view -> {
-                _onClickSortView?.invoke()
-                true
+                _onInteraction?.onClickSortView()
+                false
             }
-            else -> false
+            else -> true
         }
     }
 }

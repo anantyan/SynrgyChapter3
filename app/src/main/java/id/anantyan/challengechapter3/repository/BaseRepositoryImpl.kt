@@ -2,15 +2,20 @@ package id.anantyan.challengechapter3.repository
 
 import id.anantyan.challengechapter3.model.AlphabetModel
 import id.anantyan.challengechapter3.model.WordsModel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 
 class BaseRepositoryImpl: BaseRepository {
-    override fun listAlphabet(): List<AlphabetModel> {
+    override suspend fun listAlphabet(): List<AlphabetModel> = coroutineScope {
         val alphabets = ('A'..'Z')
         val items = alphabets.map { letter ->
-            val wordsForLetter = listWord(letter.toString()).take(3)
-            AlphabetModel(letter.toString(), wordsForLetter)
+            async {
+                val wordsForLetter = listWord(letter.toString()).take(3)
+                AlphabetModel(letter.toString(), wordsForLetter)
+            }
         }
-        return items
+        items.awaitAll()
     }
 
     override fun listWord(key: String): List<WordsModel> {
