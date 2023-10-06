@@ -37,12 +37,14 @@ class GoogleFragment : Fragment() {
         binding.webView.webViewClient = WebViewClient()
         binding.webView.settings.javaScriptEnabled = true
         binding.webView.settings.useWideViewPort = true
-        binding.webView.loadUrl("https://www.google.com/search?q="+args.word ?: "")
+        binding.webView.loadUrl("https://www.google.com/search?q=Apa+itu+"+args.word)
         binding.webView.webChromeClient = chromeProgressBar
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.webView.stopLoading()
+        binding.webView.destroy()
         _binding = null
     }
 
