@@ -27,5 +27,4 @@ _**note:**_ Menekankan sesuai pada task dan paling utama menggunakan 2 navigasi,
 ![Desktop - 2](https://github.com/anantyan/SynrgyChapter3/assets/43742778/cb38b1fc-57eb-41a3-8b1a-9ec12e00ee37)
 
 ### 📹 Capture Video
-
-https://github.com/anantyan/SynrgyChapter3/assets/43742778/205d6938-64c1-43f1-aec8-68f54668adb1
+https://github.com/anantyan/SynrgyChapter3/assets/43742778/6b1ed495-1455-4c17-a12c-686f918d88da
