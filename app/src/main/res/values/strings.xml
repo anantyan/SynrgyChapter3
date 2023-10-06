@@ -1,9 +1,3 @@
 <resources>
-    <string name="app_name">Dictionary</string>
-    <string name="change_grid">Change to Grid View</string>
-    <string name="change_sort">Change to Sort View</string>
-    <string name="on_boarding">Welcome to\nDictionary</string>
-    <string name="transform_onboardin2">Transition to OnBoarding 1</string>
-    <string name="transform_home">Transition to Home</string>
-    <string name="transform_home_collapse_toolbar">Transition to Home with Collapse Toolbar</string>
+    <string name="app_name">Mini Challenge 3</string>
 </resources>

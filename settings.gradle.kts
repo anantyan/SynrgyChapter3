@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ChallengeChapter3"
+rootProject.name = "Mini Challenge 3"
 include(":app")
