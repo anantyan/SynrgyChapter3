@@ -21,6 +21,7 @@ import id.anantyan.challengechapter3.databinding.FragmentHomeBinding
 import id.anantyan.challengechapter3.model.AlphabetModel
 import id.anantyan.challengechapter3.ui.base.BaseActivity
 import id.anantyan.challengechapter3.ui.base.BaseInteraction
+import id.anantyan.challengechapter3.ui.detail.DetailActivity
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(),
@@ -88,6 +89,7 @@ class HomeFragment : Fragment(),
         binding.rvList.adapter = adapter
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         adapter.onInteraction(this)
+        (requireActivity() as BaseActivity).setUpAppBar(true)
         (requireActivity() as BaseActivity).onInteraction(this)
     }
 
@@ -100,6 +102,11 @@ class HomeFragment : Fragment(),
         val extras = FragmentNavigatorExtras(view to (item.key ?: ""))
         val destination = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.key)
         findNavController().navigate(destination, extras)
+    }
+
+    override fun onLongClick(position: Int, item: AlphabetModel, view: View) {
+        val intent = DetailActivity.getIntent(requireContext(), item.key)
+        startActivity(intent)
     }
 
     override fun onClickGridView() {

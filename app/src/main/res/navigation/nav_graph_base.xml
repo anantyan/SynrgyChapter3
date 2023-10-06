@@ -40,7 +40,7 @@
     <fragment
         android:id="@+id/onBoarding1Fragment"
         android:name="id.anantyan.challengechapter3.ui.onboarding_1.OnBoarding1Fragment"
-        android:label="On Boarding 1"
+        android:label="@string/app_name_onboarding1"
         tools:layout="@layout/fragment_on_boarding1">
         <action
             android:id="@+id/action_onBoarding1Fragment_to_onBoarding2Fragment"
@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/onBoarding2Fragment"
         android:name="id.anantyan.challengechapter3.ui.onboarding_2.OnBoarding2Fragment"
-        android:label="On Boarding 2"
+        android:label="@string/app_name_onboarding2"
         tools:layout="@layout/fragment_on_boarding2">
         <action
             android:id="@+id/action_onBoarding2Fragment_to_homeFragment"

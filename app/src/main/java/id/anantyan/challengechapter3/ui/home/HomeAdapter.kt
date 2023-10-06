@@ -47,6 +47,13 @@ class HomeAdapter : ListAdapter<AlphabetModel, HomeAdapter.KeyModelViewHolder>(K
                     it.onClick(bindingAdapterPosition, getItem(bindingAdapterPosition), binding.root)
                 }
             }
+
+            itemView.setOnLongClickListener {
+                _onInteraction?.let {
+                    it.onLongClick(bindingAdapterPosition, getItem(bindingAdapterPosition), binding.root)
+                }
+                true
+            }
         }
 
         fun bindItem(item: AlphabetModel) {

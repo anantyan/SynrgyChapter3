@@ -13,6 +13,7 @@ import com.androidpoet.metaphor.hold
 import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.FragmentOnBoarding2Binding
+import id.anantyan.challengechapter3.ui.base.BaseActivity
 
 class OnBoarding2Fragment : Fragment(), OnClickListener {
 
@@ -39,6 +40,7 @@ class OnBoarding2Fragment : Fragment(), OnClickListener {
     private fun bindView() {
         binding.btnNext.transitionName = getString(R.string.transform_home)
         binding.btnNext.setOnClickListener(this)
+        (requireActivity() as BaseActivity).setUpAppBar(false)
     }
 
     override fun onDestroyView() {

@@ -44,12 +44,13 @@ class DetailAdapter : ListAdapter<WordsModel, DetailAdapter.KeyModelViewHolder>(
         init {
             itemView.setOnClickListener {
                 _onInteraction?.let {
-                    it.onClick(bindingAdapterPosition, getItem(bindingAdapterPosition))
+                    it.onClick(bindingAdapterPosition, getItem(bindingAdapterPosition), binding.root)
                 }
             }
         }
 
         fun bindItem(item: WordsModel) {
+            binding.root.transitionName = item.word
             binding.txtAbjad.text = item.word
         }
     }

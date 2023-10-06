@@ -3,17 +3,21 @@ package id.anantyan.challengechapter3.ui.google
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import id.anantyan.challengechapter3.R
+import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.FragmentGoogleBinding
 
 
-class GoogleFragment : Fragment() {
+class GoogleFragment : Fragment(), OnClickListener {
 
     private var _binding: FragmentGoogleBinding? = null
     private val binding get() = _binding!!
@@ -25,6 +29,8 @@ class GoogleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGoogleBinding.inflate(inflater, container, false)
+        binding.cardView.transitionName = args.word
+        doMaterialMotion(binding.cardView, args.word ?: "")
         return binding.root
     }
 
@@ -34,10 +40,12 @@ class GoogleFragment : Fragment() {
     }
 
     private fun bindView() {
+        binding.cardView.setOnClickListener(this)
+
         binding.webView.webViewClient = WebViewClient()
         binding.webView.settings.javaScriptEnabled = true
         binding.webView.settings.useWideViewPort = true
-        binding.webView.loadUrl("https://www.google.com/search?q=Apa+itu+"+args.word)
+        binding.webView.loadUrl(getString(R.string.intent_to_weburl)+args.word)
         binding.webView.webChromeClient = chromeProgressBar
     }
 
@@ -59,5 +67,9 @@ class GoogleFragment : Fragment() {
                 binding.progressBar.progress = newProgress
             }
         }
+    }
+
+    override fun onClick(p0: View?) {
+        findNavController().navigateUp()
     }
 }

@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.ActivityBaseBinding
@@ -31,7 +31,6 @@ class BaseActivity : AppCompatActivity(),
 
     private fun bindView() {
         setUpNavigation()
-        setUpAppBar(false)
     }
 
     private fun setUpNavigation() {
@@ -45,12 +44,7 @@ class BaseActivity : AppCompatActivity(),
             )
         )
         binding.toolbar.setOnMenuItemClickListener(this)
-        NavigationUI.setupWithNavController(
-            binding.collapseToolbar,
-            binding.toolbar,
-            navController,
-            appBar
-        )
+        binding.collapseToolbar.setupWithNavController(binding.toolbar, navController, appBar)
     }
 
     private fun setUpMenuItem(bool: Boolean = false) {
@@ -58,7 +52,7 @@ class BaseActivity : AppCompatActivity(),
         binding.toolbar.menu.findItem(R.id.sort_view).isVisible = bool
     }
 
-    private fun setUpAppBar(bool: Boolean = false) {
+    fun setUpAppBar(bool: Boolean = false) {
         binding.collapseToolbar.isVisible = bool
         binding.toolbar.isVisible = bool
     }
@@ -99,7 +93,10 @@ class BaseActivity : AppCompatActivity(),
                 setUpMenuItem(false)
                 setUpAppBar(false)
             }
-            else -> {}
+            else -> {
+                setUpMenuItem(false)
+                setUpAppBar(false)
+            }
         }
     }
 

@@ -13,11 +13,13 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.androidpoet.metaphor.hold
 import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.FragmentDetailBinding
@@ -47,6 +49,7 @@ class DetailFragment : Fragment(), DetailInteraction, BaseInteraction {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hold()
         bindView()
         bindObserver()
     }
@@ -79,8 +82,11 @@ class DetailFragment : Fragment(), DetailInteraction, BaseInteraction {
         binding.rvList.itemAnimator = DefaultItemAnimator()
         binding.rvList.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvList.adapter = adapter
+
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         adapter.onInteraction(this)
+
+        (requireActivity() as BaseActivity).setUpAppBar(true)
         (requireActivity() as BaseActivity).onInteraction(this)
     }
 
@@ -97,8 +103,9 @@ class DetailFragment : Fragment(), DetailInteraction, BaseInteraction {
         viewModel.toggleSort()
     }
 
-    override fun onClick(position: Int, item: WordsModel) {
+    override fun onClick(position: Int, item: WordsModel, view: View) {
+        val extras = FragmentNavigatorExtras(view to (item.word ?: ""))
         val destination = DetailFragmentDirections.actionDetailFragmentToGoogleFragment(item.word)
-        findNavController().navigate(destination)
+        findNavController().navigate(destination, extras)
     }
 }
