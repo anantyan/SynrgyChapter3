@@ -4,6 +4,8 @@
 
 Hasil challenge dari pembelajaran intensif chapter 3 - Yang dimana project tersebut berisikan sebuah konten list huruf abjad a-z ketika pengguna klik maka beralih ke list kata kunci sesuai huruf yang pengguna klik, setelah itu akan terdapat list kata kunci yang bisa di klik mengarah ke pencarian Google
 
+_**note:**_ Menekankan sesuai pada task dan paling utama menggunakan 2 navigasi, telah dibuatkan dengan cara 2 interaksi klik, klik yang pertama akan mengarah pada detail fragment dan menggunakan _**Navigation Component**_ ✔ klik yang kedua mengarah pada detail activity tanpa menggunakan _**Navigation Component**_ ✔
+
 ### 👣 Project Structure
 
 - app
