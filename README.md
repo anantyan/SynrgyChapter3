@@ -3,7 +3,7 @@
 ### 📌 Description
 Hasil challenge dari pembelajaran intensif chapter 3 - Yang dimana project tersebut berisikan sebuah konten list huruf abjad a-z ketika pengguna klik maka beralih ke list kata kunci sesuai huruf yang pengguna klik, setelah itu akan terdapat list kata kunci yang bisa di klik mengarah ke pencarian Google
 
-***note:*** Menekankan pada kriteria task dan paling utama telah mengimplementasikan 2 navigasi, telah dibuatkan dengan cara 2 interaksi klik, klik yang pertama (tekan biasa pada list item **Halaman Home**) akan mengarah pada detail fragment dan menggunakan ***Navigation Component*** ✔ klik yang kedua (tekan tahan pada list item **Halaman Home**) mengarah pada detail activity tanpa menggunakan ***Navigation Component*** ✔
+***note:*** Menekankan pada kriteria task dan paling utama telah mengimplementasikan 2 navigasi, telah dibuatkan dengan cara 2 interaksi klik, klik yang pertama (tekan biasa pada list item **Halaman Home**) akan mengarah pada detail fragment dan menggunakan ***Navigation Component*** ✔ klik yang kedua (tekan tahan pada list item **Halaman Home**) mengarah pada detail activity tanpa menggunakan ***Navigation Component*** ✔ dan yang terakhir telah mengimplementasikan _**Intent Implicit**_ ke web url ✔
 
 - **Implement onClick to other Fragment (Detail Fragment) - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/home/HomeFragment.kt#L101-L105)**
 ```kotlin
