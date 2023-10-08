@@ -1,5 +1,11 @@
 # SynrgyChapter3
 
+### 🚩Table of Dones
+[Description](https://github.com/anantyan/SynrgyChapter3#-description)<br>
+[Project Structure](https://github.com/anantyan/SynrgyChapter3#-project-structure)<br>
+[Snapshoot](https://github.com/anantyan/SynrgyChapter3#%EF%B8%8F-snapshoot)<br>
+[Capture Video](https://github.com/anantyan/SynrgyChapter3#-capture-video)
+
 ### 📌 Description
 Hasil challenge dari pembelajaran intensif chapter 3 - Yang dimana project tersebut berisikan sebuah konten list huruf abjad a-z ketika pengguna klik maka beralih ke list kata kunci sesuai huruf yang pengguna klik, setelah itu akan terdapat list kata kunci yang bisa di klik mengarah ke pencarian Google
 
