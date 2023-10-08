@@ -22,7 +22,7 @@ override fun onLongClick(position: Int, item: AlphabetModel, view: View) {
 }
 ```
 
-- **Implement get passing data from other Fragment (Home Fragment) to Detail Fragment - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/detail/DetailFragment.kt#L57-L78)**
+- **Implement get passing data from other Fragment (Home Fragment) to Detail Fragment - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/detail/DetailActivity.kt#L40-L61)**
 ```kotlin
 // initialize safe args
 private val args: DetailFragmentArgs by navArgs()
