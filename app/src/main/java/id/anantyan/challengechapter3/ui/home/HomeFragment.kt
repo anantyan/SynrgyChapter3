@@ -1,9 +1,11 @@
 package id.anantyan.challengechapter3.ui.home
 
+import android.app.ActivityOptions
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -105,8 +107,13 @@ class HomeFragment : Fragment(),
     }
 
     override fun onLongClick(position: Int, item: AlphabetModel, view: View) {
+        val extras = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            requireActivity(),
+            view,
+            view.transitionName
+        )
         val intent = DetailActivity.getIntent(requireContext(), item.key)
-        startActivity(intent)
+        startActivity(intent, extras.toBundle())
     }
 
     override fun onClickGridView() {

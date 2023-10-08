@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.anantyan.challengechapter3.R
+import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.ActivityDetailBinding
 import id.anantyan.challengechapter3.model.WordsModel
 import kotlinx.coroutines.launch
@@ -32,6 +34,8 @@ class DetailActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding.root.transitionName = key
+        doMaterialMotion(binding.root, key)
         setContentView(binding.root)
         bindView()
         bindObserver()
