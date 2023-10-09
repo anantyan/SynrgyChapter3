@@ -1,6 +1,6 @@
 # SynrgyChapter3
 
-### 🚩Table of Dones
+### 🚩Table of Contents
 [Description](https://github.com/anantyan/SynrgyChapter3#-description)<br>
 [Project Structure](https://github.com/anantyan/SynrgyChapter3#-project-structure)<br>
 [Snapshoot](https://github.com/anantyan/SynrgyChapter3#%EF%B8%8F-snapshoot)<br>
