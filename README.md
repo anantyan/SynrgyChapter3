@@ -120,4 +120,4 @@ private fun bindObserver() {
 ![Desktop - 2](https://github.com/anantyan/SynrgyChapter3/assets/43742778/02b406a0-dbbe-424f-ad97-47bd619c885d)
 
 ### 📹 Capture Video
-https://github.com/anantyan/SynrgyChapter3/assets/43742778/1475809c-d0fa-4d0e-aec9-9c779d333ee8
+https://github.com/anantyan/SynrgyChapter3/assets/43742778/d6cc37ef-4a2e-4ba1-b2ac-1239a3a6a2e9
