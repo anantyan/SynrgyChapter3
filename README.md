@@ -99,6 +99,14 @@ private fun bindObserver() {
     }
 }
 ```
+- Implement passing data Intent Implicit to Web URL (Detail Activity) to Web Url - [link](https://github.com/anantyan/SynrgyChapter3/blob/da275663b2a02fb213ff96b076bd7f8c68b8ddf7/app/src/main/java/id/anantyan/challengechapter3/ui/detail/DetailActivity.kt#L89-L93)
+```kotlin
+override fun onClick(position: Int, item: WordsModel, view: View) {
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.data = Uri.parse(getString(R.string.intent_to_weburl)+item.word)
+    startActivity(intent)
+}
+```
 
 ### 👣 Project Structure
 - app
