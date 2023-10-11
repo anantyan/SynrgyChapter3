@@ -11,7 +11,7 @@ Hasil challenge dari pembelajaran intensif chapter 3 - Yang dimana project terse
 
 ***note:*** Menekankan pada kriteria task dan paling utama telah mengimplementasikan 2 navigasi, telah dibuatkan dengan cara 2 interaksi klik, klik yang pertama (tekan biasa pada list item **Halaman Home**) akan mengarah pada detail fragment dan menggunakan ***Navigation Component*** ✔ klik yang kedua (tekan tahan pada list item **Halaman Home**) mengarah pada detail activity tanpa menggunakan ***Navigation Component*** ✔ dan yang terakhir telah mengimplementasikan _**Intent Implicit**_ ke web url ✔
 
-- **Implement onClick to other Fragment (Detail Fragment) - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/home/HomeFragment.kt#L101-L105)**
+- **Implement onClick Navigation Component to other Fragment (Detail Fragment) - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/home/HomeFragment.kt#L101-L105)**
 ```kotlin
 override fun onClick(position: Int, item: AlphabetModel, view: View) {
     val extras = FragmentNavigatorExtras(view to (item.key ?: ""))
@@ -20,7 +20,7 @@ override fun onClick(position: Int, item: AlphabetModel, view: View) {
 }
 ```
 
-- **Implement onClick to other Activity (Detail Activity) - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/home/HomeFragment.kt#L107-L110)**
+- **Implement onClick Intent Explicit to other Activity (Detail Activity) - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/home/HomeFragment.kt#L107-L110)**
 ```kotlin
 override fun onLongClick(position: Int, item: AlphabetModel, view: View) {
     val intent = DetailActivity.getIntent(requireContext(), item.key)
@@ -28,7 +28,7 @@ override fun onLongClick(position: Int, item: AlphabetModel, view: View) {
 }
 ```
 
-- **Implement get passing data from other Fragment (Home Fragment) to Detail Fragment - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/detail/DetailFragment.kt#L57-L78)**
+- **Implement passing data Navigation Component from other Fragment (Home Fragment) to Detail Fragment - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/detail/DetailFragment.kt#L57-L78)**
 ```kotlin
 // initialize safe args
 private val args: DetailFragmentArgs by navArgs()
@@ -58,7 +58,7 @@ private fun bindObserver() {
 }
 ```
 
-- **Implement get passing data from other Fragment (Home Fragment) to Detail Activity - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/detail/DetailActivity.kt#L40-L61)**
+- **Implement passing data Intent Explicit from other Fragment (Home Fragment) to Detail Activity - [link](https://github.com/anantyan/SynrgyChapter3/blob/e85303b03143eea425732d6ac15a33b153385d0a/app/src/main/java/id/anantyan/challengechapter3/ui/detail/DetailActivity.kt#L40-L61)**
 ```kotlin
 // singleton intent with passing data
 companion object {
@@ -99,7 +99,7 @@ private fun bindObserver() {
     }
 }
 ```
-- Implement passing data Intent Implicit to Web URL (Detail Activity) to Web Url - [link](https://github.com/anantyan/SynrgyChapter3/blob/da275663b2a02fb213ff96b076bd7f8c68b8ddf7/app/src/main/java/id/anantyan/challengechapter3/ui/detail/DetailActivity.kt#L89-L93)
+- **Implement passing data Intent Implicit to Web URL (Detail Activity) to Web Url - [link](https://github.com/anantyan/SynrgyChapter3/blob/da275663b2a02fb213ff96b076bd7f8c68b8ddf7/app/src/main/java/id/anantyan/challengechapter3/ui/detail/DetailActivity.kt#L89-L93)**
 ```kotlin
 override fun onClick(position: Int, item: WordsModel, view: View) {
     val intent = Intent(Intent.ACTION_VIEW)
