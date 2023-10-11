@@ -39,8 +39,8 @@ class BaseActivity : AppCompatActivity(),
         navController.addOnDestinationChangedListener(this)
         val appBar = AppBarConfiguration(
             setOf(
-                R.id.onBoarding1Fragment,
-                R.id.onBoarding2Fragment
+                R.id.baseOnBoardingFragment,
+                R.id.homeFragment
             )
         )
         binding.toolbar.setOnMenuItemClickListener(this)
@@ -71,11 +71,7 @@ class BaseActivity : AppCompatActivity(),
         arguments: Bundle?
     ) {
         when (destination.id) {
-            R.id.onBoarding1Fragment -> {
-                setUpMenuItem(false)
-                setUpAppBar(false)
-            }
-            R.id.onBoarding2Fragment -> {
+            R.id.baseOnBoardingFragment -> {
                 setUpMenuItem(false)
                 setUpAppBar(false)
             }

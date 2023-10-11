@@ -7,6 +7,8 @@
     <string name="change_sort">Change to Sort View</string>
     <string name="on_boarding">Welcome to\nDictionary</string>
     <string name="aplikasi_ini_penuh_dengan_seni_motion">Aplikasi ini penuh dengan\nseni motion</string>
+    <string name="btn_onboarding">Next</string>
+    <string name="btn_last_onboarding">Go!</string>
 
     <string name="transform_onboardin2">Transition to OnBoarding 1</string>
     <string name="transform_home">Transition to Home</string>
