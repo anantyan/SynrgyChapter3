@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.google.GoogleFragment">
+    tools:context=".ui.google.GoogleActivity">
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -44,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:src="@drawable/round_arrow_back_ios_new_24"
-            android:tint="?attr/colorPrimary" />
+            app:tint="?attr/colorPrimary" />
 
     </com.google.android.material.card.MaterialCardView>
 

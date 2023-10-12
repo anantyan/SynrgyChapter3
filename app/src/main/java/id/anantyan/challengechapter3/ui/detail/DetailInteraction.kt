@@ -5,4 +5,5 @@ import id.anantyan.challengechapter3.model.WordsModel
 
 interface DetailInteraction {
     fun onClick(position: Int, item: WordsModel, view: View)
+    fun onLongClick(position: Int, item: WordsModel, view: View)
 }

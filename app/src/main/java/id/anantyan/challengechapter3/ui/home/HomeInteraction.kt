@@ -5,5 +5,4 @@ import id.anantyan.challengechapter3.model.AlphabetModel
 
 interface HomeInteraction {
     fun onClick(position: Int, item: AlphabetModel, view: View)
-    fun onLongClick(position: Int, item: AlphabetModel, view: View)
 }

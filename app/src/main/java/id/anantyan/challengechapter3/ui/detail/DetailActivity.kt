@@ -8,11 +8,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.Window
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.ActivityNavigatorExtras
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +20,7 @@ import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.ActivityDetailBinding
 import id.anantyan.challengechapter3.model.WordsModel
+import id.anantyan.challengechapter3.ui.google.GoogleActivity
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity(),
@@ -29,7 +30,7 @@ class DetailActivity : AppCompatActivity(),
     private lateinit var binding: ActivityDetailBinding
     private val viewModel: DetailViewModel by viewModels()
     private val adapter: DetailAdapter by lazy { DetailAdapter() }
-    private val key: String by lazy { intent.getStringExtra(EXTRA_HOME_DETAIL) ?: "" }
+    private val key: String by lazy { intent.getStringExtra(EXTRA_DETAIL_ACTIVITY) ?: "" }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,6 +93,16 @@ class DetailActivity : AppCompatActivity(),
         startActivity(intent)
     }
 
+    override fun onLongClick(position: Int, item: WordsModel, view: View) {
+        val extras = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this,
+            view,
+            view.transitionName
+        )
+        val intent = GoogleActivity.getIntent(this, item.word)
+        startActivity(intent, extras.toBundle())
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -112,12 +123,15 @@ class DetailActivity : AppCompatActivity(),
     }
 
     companion object {
-        private const val EXTRA_HOME_DETAIL = "EXTRA_DETAIL_ACTIVIVTY"
+        private const val EXTRA_DETAIL_ACTIVITY = "EXTRA_DETAIL_ACTIVIVTY"
 
         @JvmStatic
-        fun getIntent(context: Context?, key: String?) = Intent(context, DetailActivity::class.java).apply {
+        fun getIntent(
+            context: Context?,
+            key: String?
+        ) = Intent(context, DetailActivity::class.java).apply {
             key?.let {
-                putExtra(EXTRA_HOME_DETAIL, it)
+                putExtra(EXTRA_DETAIL_ACTIVITY, it)
             }
         }
     }

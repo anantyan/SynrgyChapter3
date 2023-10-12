@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Dictionary</string>
-    <string name="app_name_onboarding1">On Boarding 1</string>
-    <string name="app_name_onboarding2">On Boarding 2</string>
     <string name="app_name_detail">Alphabet</string>
     <string name="change_grid">Change to Grid View</string>
     <string name="change_sort">Change to Sort View</string>
@@ -10,9 +8,7 @@
     <string name="btn_onboarding">Next</string>
     <string name="btn_last_onboarding">Go!</string>
 
-    <string name="transform_onboardin2">Transition to OnBoarding 1</string>
     <string name="transform_home">Transition to Home</string>
-    <string name="transform_home_collapse_toolbar">Transition to Home with Collapse Toolbar</string>
 
     <string name="intent_to_weburl">https://www.google.com/search?q=Apa+itu+</string>
 </resources>
