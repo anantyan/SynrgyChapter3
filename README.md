@@ -126,8 +126,9 @@ override fun onClick(position: Int, item: WordsModel, view: View) {
                 - onboarding_2
 
 ### 🖼️ Snapshoot
-![Desktop - 1](https://github.com/anantyan/SynrgyChapter3/assets/43742778/42a6f601-20f9-44f6-a587-eed8ec7a81f7)
+![Desktop - 1](https://github.com/anantyan/SynrgyChapter3/assets/43742778/bd440eea-752e-4c3c-b14f-497385ed7b32)
 ![Desktop - 2](https://github.com/anantyan/SynrgyChapter3/assets/43742778/02b406a0-dbbe-424f-ad97-47bd619c885d)
+![Desktop - 3](https://github.com/anantyan/SynrgyChapter3/assets/43742778/3dd92148-0e2e-4fbd-96cc-b0e870244902)
 
 ### 📹 Capture Video
-https://github.com/anantyan/SynrgyChapter3/assets/43742778/d6cc37ef-4a2e-4ba1-b2ac-1239a3a6a2e9
+https://github.com/anantyan/SynrgyChapter3/assets/43742778/16262df6-0234-4c76-8100-115c029e707e
