@@ -1,36 +1,77 @@
 package id.anantyan.challengechapter3.ui.base
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.ActivityBaseBinding
+import id.anantyan.challengechapter3.model.WordsModel
+import id.anantyan.challengechapter3.ui.detail.DetailAdapter
+import id.anantyan.challengechapter3.ui.detail.DetailFragmentDirections
+import id.anantyan.challengechapter3.ui.detail.DetailInteraction
+import kotlinx.coroutines.launch
 
 class BaseActivity : AppCompatActivity(),
     NavController.OnDestinationChangedListener,
-    Toolbar.OnMenuItemClickListener {
+    Toolbar.OnMenuItemClickListener,
+    DetailInteraction {
 
     private var _onInteraction: BaseInteraction? = null
     private lateinit var navController: NavController
     private lateinit var binding: ActivityBaseBinding
+    private val viewModel: BaseViewModel by viewModels()
+    private val adapter: DetailAdapter by lazy { DetailAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bindView()
+        bindObserver()
+    }
+
+    private fun bindObserver() {
+        lifecycleScope.launch {
+            viewModel.getAll.collect { list ->
+                adapter.submitList(list)
+            }
+        }
     }
 
     private fun bindView() {
         setUpNavigation()
+        setUpSearchAdapter()
+    }
+
+    private fun setUpSearchAdapter() {
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.itemAnimator = DefaultItemAnimator()
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerView.adapter = adapter
+
+        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        adapter.onInteraction(this)
     }
 
     private fun setUpNavigation() {
@@ -44,7 +85,12 @@ class BaseActivity : AppCompatActivity(),
             )
         )
         binding.toolbar.setOnMenuItemClickListener(this)
-        binding.collapseToolbar.setupWithNavController(binding.toolbar, navController, appBar)
+        binding.toolbar.setupWithNavController(navController, appBar)
+
+        binding.searchBar.setOnClickListener { binding.searchBar.collapse(binding.searchView, binding.appBar) }
+        binding.searchBar.isDefaultScrollFlagsEnabled = false
+
+        binding.searchView.editText.addTextChangedListener(textWatcher())
     }
 
     private fun setUpMenuItem(bool: Boolean = false) {
@@ -53,7 +99,7 @@ class BaseActivity : AppCompatActivity(),
     }
 
     fun setUpAppBar(bool: Boolean = false) {
-        binding.collapseToolbar.isVisible = bool
+        binding.searchBar.isVisible = bool
         binding.toolbar.isVisible = bool
     }
 
@@ -76,12 +122,12 @@ class BaseActivity : AppCompatActivity(),
                 setUpAppBar(false)
             }
             R.id.homeFragment -> {
-                binding.collapseToolbar.doMaterialMotion(binding.appBar)
+                binding.toolbar.doMaterialMotion(binding.appBar)
                 setUpMenuItem(true)
                 setUpAppBar(true)
             }
             R.id.detailFragment -> {
-                binding.collapseToolbar.doMaterialMotion(binding.appBar)
+                binding.toolbar.doMaterialMotion(binding.appBar)
                 setUpMenuItem(true)
                 setUpAppBar(true)
             }
@@ -108,5 +154,21 @@ class BaseActivity : AppCompatActivity(),
             }
             else -> true
         }
+    }
+
+    private fun textWatcher() = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+
+        override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            viewModel.getAll(s.toString(), false)
+        }
+
+        override fun afterTextChanged(p0: Editable?) { }
+    }
+
+    override fun onClick(position: Int, item: WordsModel, view: View) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(getString(R.string.intent_to_weburl)+item.word)
+        startActivity(intent)
     }
 }

@@ -15,4 +15,5 @@
     <string name="transform_home_collapse_toolbar">Transition to Home with Collapse Toolbar</string>
 
     <string name="intent_to_weburl">https://www.google.com/search?q=Apa+itu+</string>
+    <string name="searchbar_hint">Searching...</string>
 </resources>
