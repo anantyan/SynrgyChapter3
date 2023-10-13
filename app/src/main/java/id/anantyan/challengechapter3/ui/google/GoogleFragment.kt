@@ -50,15 +50,6 @@ class GoogleFragment : Fragment(), OnClickListener {
         binding.webView.webChromeClient = chromeProgressBar
 
         requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
-        disableOnBackPressedCallback(onBackPressedCallback)
-    }
-
-    private fun disableOnBackPressedCallback(onBackPressedCallback: OnBackPressedCallback) {
-        binding.webView.webViewClient = object : WebViewClient() {
-            override fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {
-                onBackPressedCallback.isEnabled = binding.webView.canGoBack()
-            }
-        }
     }
 
     override fun onDestroyView() {
@@ -72,6 +63,7 @@ class GoogleFragment : Fragment(), OnClickListener {
         override fun handleOnBackPressed() {
             when {
                 binding.webView.canGoBack() -> binding.webView.goBack()
+                else -> findNavController().navigateUp()
             }
         }
     }

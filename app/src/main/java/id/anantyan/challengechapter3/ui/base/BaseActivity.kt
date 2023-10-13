@@ -100,22 +100,12 @@ class BaseActivity : AppCompatActivity(),
         binding.toolbar.menu.findItem(R.id.sort_view).isVisible = bool
     }
 
-    private fun setSearchViewDetail() = object : OnBackPressedCallback(true) {
+    private fun setSearchView(listener: () -> Unit) = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             if (binding.searchView.isShowing) {
                 binding.searchView.hide()
             } else {
-                navController.navigateUp()
-            }
-        }
-    }
-
-    private fun setSearchViewHome() = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            if (binding.searchView.isShowing) {
-                binding.searchView.hide()
-            } else {
-                finish()
+                listener.invoke()
             }
         }
     }
@@ -148,13 +138,13 @@ class BaseActivity : AppCompatActivity(),
                 binding.toolbar.doMaterialMotion(binding.appBar)
                 setUpMenuItem(true)
                 setUpAppBar(true)
-                onBackPressedDispatcher.addCallback(setSearchViewHome())
+                onBackPressedDispatcher.addCallback(setSearchView { finish() })
             }
             R.id.detailFragment -> {
                 binding.toolbar.doMaterialMotion(binding.appBar)
                 setUpMenuItem(true)
                 setUpAppBar(true)
-                onBackPressedDispatcher.addCallback(setSearchViewDetail())
+                onBackPressedDispatcher.addCallback(setSearchView { navController.navigateUp() })
             }
             R.id.googleFragment -> {
                 setUpMenuItem(false)
