@@ -2,12 +2,15 @@ package id.anantyan.challengechapter3.ui.base
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -15,20 +18,18 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.search.SearchView
 import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.ActivityBaseBinding
 import id.anantyan.challengechapter3.model.WordsModel
 import id.anantyan.challengechapter3.ui.detail.DetailAdapter
-import id.anantyan.challengechapter3.ui.detail.DetailFragmentDirections
 import id.anantyan.challengechapter3.ui.detail.DetailInteraction
 import kotlinx.coroutines.launch
 
@@ -39,6 +40,7 @@ class BaseActivity : AppCompatActivity(),
 
     private var _onInteraction: BaseInteraction? = null
     private lateinit var navController: NavController
+    private lateinit var navDestination: NavDestination
     private lateinit var binding: ActivityBaseBinding
     private val viewModel: BaseViewModel by viewModels()
     private val adapter: DetailAdapter by lazy { DetailAdapter() }
@@ -98,6 +100,26 @@ class BaseActivity : AppCompatActivity(),
         binding.toolbar.menu.findItem(R.id.sort_view).isVisible = bool
     }
 
+    private fun setSearchViewDetail() = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (binding.searchView.isShowing) {
+                binding.searchView.hide()
+            } else {
+                navController.navigateUp()
+            }
+        }
+    }
+
+    private fun setSearchViewHome() = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (binding.searchView.isShowing) {
+                binding.searchView.hide()
+            } else {
+                finish()
+            }
+        }
+    }
+
     fun setUpAppBar(bool: Boolean = false) {
         binding.searchBar.isVisible = bool
         binding.toolbar.isVisible = bool
@@ -116,6 +138,7 @@ class BaseActivity : AppCompatActivity(),
         destination: NavDestination,
         arguments: Bundle?
     ) {
+        navDestination = destination
         when (destination.id) {
             R.id.baseOnBoardingFragment -> {
                 setUpMenuItem(false)
@@ -125,11 +148,13 @@ class BaseActivity : AppCompatActivity(),
                 binding.toolbar.doMaterialMotion(binding.appBar)
                 setUpMenuItem(true)
                 setUpAppBar(true)
+                onBackPressedDispatcher.addCallback(setSearchViewHome())
             }
             R.id.detailFragment -> {
                 binding.toolbar.doMaterialMotion(binding.appBar)
                 setUpMenuItem(true)
                 setUpAppBar(true)
+                onBackPressedDispatcher.addCallback(setSearchViewDetail())
             }
             R.id.googleFragment -> {
                 setUpMenuItem(false)

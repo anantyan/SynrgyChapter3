@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -47,6 +48,17 @@ class GoogleFragment : Fragment(), OnClickListener {
         binding.webView.settings.useWideViewPort = true
         binding.webView.loadUrl(getString(R.string.intent_to_weburl)+args.word)
         binding.webView.webChromeClient = chromeProgressBar
+
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
+        disableOnBackPressedCallback(onBackPressedCallback)
+    }
+
+    private fun disableOnBackPressedCallback(onBackPressedCallback: OnBackPressedCallback) {
+        binding.webView.webViewClient = object : WebViewClient() {
+            override fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {
+                onBackPressedCallback.isEnabled = binding.webView.canGoBack()
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -54,6 +66,14 @@ class GoogleFragment : Fragment(), OnClickListener {
         binding.webView.stopLoading()
         binding.webView.destroy()
         _binding = null
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            when {
+                binding.webView.canGoBack() -> binding.webView.goBack()
+            }
+        }
     }
 
     private val chromeProgressBar = object : WebChromeClient() {
@@ -70,6 +90,9 @@ class GoogleFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        findNavController().navigateUp()
+        when {
+            binding.webView.canGoBack() -> binding.webView.goBack()
+            else -> findNavController().navigateUp()
+        }
     }
 }

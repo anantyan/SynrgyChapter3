@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -89,12 +90,12 @@ class HomeFragment : Fragment(),
         binding.rvList.itemAnimator = DefaultItemAnimator()
         binding.rvList.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.rvList.adapter = adapter
+
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         adapter.onInteraction(this)
         (requireActivity() as BaseActivity).setUpAppBar(true)
         (requireActivity() as BaseActivity).onInteraction(this)
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
