@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="id.anantyan.challengechapter3.ui.home.HomeFragment"
+        android:name="id.anantyan.challengechapter3.presentation.home.HomeFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="id.anantyan.challengechapter3.ui.detail.DetailFragment"
+        android:name="id.anantyan.challengechapter3.presentation.detail.DetailFragment"
         android:label="Alphabet {key}"
         tools:layout="@layout/fragment_detail">
         <argument
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/googleFragment"
-        android:name="id.anantyan.challengechapter3.ui.google.GoogleFragment"
+        android:name="id.anantyan.challengechapter3.presentation.google.GoogleFragment"
         android:label="{word}"
         tools:layout="@layout/fragment_google" >
         <argument
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/baseOnBoardingFragment"
-        android:name="id.anantyan.challengechapter3.ui.onboarding.BaseOnBoardingFragment"
+        android:name="id.anantyan.challengechapter3.presentation.onboarding.BaseOnBoardingFragment"
         android:label="fragment_base_on_boarding"
         tools:layout="@layout/fragment_base_on_boarding" >
         <action

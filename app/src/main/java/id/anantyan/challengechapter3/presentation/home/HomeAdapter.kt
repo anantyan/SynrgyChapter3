@@ -1,4 +1,4 @@
-package id.anantyan.challengechapter3.ui.home
+package id.anantyan.challengechapter3.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import id.anantyan.challengechapter3.databinding.ListItemHomeBinding
-import id.anantyan.challengechapter3.model.AlphabetModel
+import id.anantyan.challengechapter3.data.alphabet.AlphabetModel
 
 class HomeAdapter : ListAdapter<AlphabetModel, HomeAdapter.KeyModelViewHolder>(KeyModelComparator) {
 

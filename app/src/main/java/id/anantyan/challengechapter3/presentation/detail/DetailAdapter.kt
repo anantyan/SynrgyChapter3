@@ -1,15 +1,12 @@
-package id.anantyan.challengechapter3.ui.detail
+package id.anantyan.challengechapter3.presentation.detail
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import id.anantyan.challengechapter3.databinding.ListItemDetailBinding
-import id.anantyan.challengechapter3.databinding.ListItemHomeBinding
-import id.anantyan.challengechapter3.model.WordsModel
-import id.anantyan.challengechapter3.ui.home.HomeInteraction
+import id.anantyan.challengechapter3.data.words.WordsModel
 
 class DetailAdapter : ListAdapter<WordsModel, DetailAdapter.KeyModelViewHolder>(KeyModelComparator) {
 

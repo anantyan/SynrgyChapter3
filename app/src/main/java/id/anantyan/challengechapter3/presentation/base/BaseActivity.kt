@@ -1,16 +1,13 @@
-package id.anantyan.challengechapter3.ui.base
+package id.anantyan.challengechapter3.presentation.base
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -24,13 +21,12 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.search.SearchView
 import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.ActivityBaseBinding
-import id.anantyan.challengechapter3.model.WordsModel
-import id.anantyan.challengechapter3.ui.detail.DetailAdapter
-import id.anantyan.challengechapter3.ui.detail.DetailInteraction
+import id.anantyan.challengechapter3.data.words.WordsModel
+import id.anantyan.challengechapter3.presentation.detail.DetailAdapter
+import id.anantyan.challengechapter3.presentation.detail.DetailInteraction
 import kotlinx.coroutines.launch
 
 class BaseActivity : AppCompatActivity(),

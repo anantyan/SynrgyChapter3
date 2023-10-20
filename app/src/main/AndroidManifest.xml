@@ -16,10 +16,10 @@
         android:theme="@style/Theme.ChallengeChapter3"
         tools:targetApi="33">
         <activity
-            android:name=".ui.detail.DetailActivity"
+            android:name=".presentation.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.base.BaseActivity"
+            android:name=".presentation.base.BaseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

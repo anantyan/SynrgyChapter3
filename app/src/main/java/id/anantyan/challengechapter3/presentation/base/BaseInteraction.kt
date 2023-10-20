@@ -1,4 +1,4 @@
-package id.anantyan.challengechapter3.ui.base
+package id.anantyan.challengechapter3.presentation.base
 
 interface BaseInteraction {
     fun onClickGridView()

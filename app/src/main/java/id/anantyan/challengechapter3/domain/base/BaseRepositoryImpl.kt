@@ -1,7 +1,7 @@
-package id.anantyan.challengechapter3.repository
+package id.anantyan.challengechapter3.domain.base
 
-import id.anantyan.challengechapter3.model.AlphabetModel
-import id.anantyan.challengechapter3.model.WordsModel
+import id.anantyan.challengechapter3.data.alphabet.AlphabetModel
+import id.anantyan.challengechapter3.data.words.WordsModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope

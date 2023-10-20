@@ -1,13 +1,12 @@
-package id.anantyan.challengechapter3.ui.home
+package id.anantyan.challengechapter3.presentation.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
 import id.anantyan.challengechapter3.databinding.ListItemChildBinding
-import id.anantyan.challengechapter3.model.WordsModel
+import id.anantyan.challengechapter3.data.words.WordsModel
 
 class HomeChildAdapter : ListAdapter<WordsModel, HomeChildAdapter.WordsModelViewHolder>(WordsModelComparator) {
 

@@ -1,7 +1,7 @@
-package id.anantyan.challengechapter3.ui.home
+package id.anantyan.challengechapter3.presentation.home
 
 import android.view.View
-import id.anantyan.challengechapter3.model.AlphabetModel
+import id.anantyan.challengechapter3.data.alphabet.AlphabetModel
 
 interface HomeInteraction {
     fun onClick(position: Int, item: AlphabetModel, view: View)

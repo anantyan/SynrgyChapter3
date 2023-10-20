@@ -1,4 +1,4 @@
-package id.anantyan.challengechapter3.ui.google
+package id.anantyan.challengechapter3.presentation.google
 
 import android.os.Bundle
 import android.view.LayoutInflater

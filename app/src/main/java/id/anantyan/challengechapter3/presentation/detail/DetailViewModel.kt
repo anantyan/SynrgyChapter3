@@ -1,9 +1,9 @@
-package id.anantyan.challengechapter3.ui.detail
+package id.anantyan.challengechapter3.presentation.detail
 
 import androidx.lifecycle.ViewModel
-import id.anantyan.challengechapter3.model.WordsModel
-import id.anantyan.challengechapter3.repository.BaseRepository
-import id.anantyan.challengechapter3.repository.BaseRepositoryImpl
+import id.anantyan.challengechapter3.data.words.WordsModel
+import id.anantyan.challengechapter3.domain.base.BaseRepository
+import id.anantyan.challengechapter3.domain.base.BaseRepositoryImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

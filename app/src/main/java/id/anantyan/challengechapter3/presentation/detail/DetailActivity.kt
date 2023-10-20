@@ -1,4 +1,4 @@
-package id.anantyan.challengechapter3.ui.detail
+package id.anantyan.challengechapter3.presentation.detail
 
 import android.content.Context
 import android.content.Intent
@@ -8,10 +8,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.Window
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.ActivityDetailBinding
-import id.anantyan.challengechapter3.model.WordsModel
+import id.anantyan.challengechapter3.data.words.WordsModel
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity(),

@@ -1,16 +1,9 @@
-package id.anantyan.challengechapter3.ui.detail
+package id.anantyan.challengechapter3.presentation.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -21,12 +14,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androidpoet.metaphor.hold
-import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.FragmentDetailBinding
-import id.anantyan.challengechapter3.model.WordsModel
-import id.anantyan.challengechapter3.ui.base.BaseActivity
-import id.anantyan.challengechapter3.ui.base.BaseInteraction
+import id.anantyan.challengechapter3.data.words.WordsModel
+import id.anantyan.challengechapter3.presentation.base.BaseActivity
+import id.anantyan.challengechapter3.presentation.base.BaseInteraction
 import kotlinx.coroutines.launch
 
 class DetailFragment : Fragment(), DetailInteraction, BaseInteraction {

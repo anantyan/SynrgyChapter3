@@ -1,16 +1,13 @@
-package id.anantyan.challengechapter3.ui.home
+package id.anantyan.challengechapter3.presentation.home
 
-import android.app.ActivityOptions
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -21,11 +18,10 @@ import id.anantyan.challengechapter3.R
 import id.anantyan.challengechapter3.common.Resource
 import id.anantyan.challengechapter3.common.doMaterialMotion
 import id.anantyan.challengechapter3.databinding.FragmentHomeBinding
-import id.anantyan.challengechapter3.model.AlphabetModel
-import id.anantyan.challengechapter3.ui.base.BaseActivity
-import id.anantyan.challengechapter3.ui.base.BaseInteraction
-import id.anantyan.challengechapter3.ui.detail.DetailActivity
-import kotlinx.coroutines.launch
+import id.anantyan.challengechapter3.data.alphabet.AlphabetModel
+import id.anantyan.challengechapter3.presentation.base.BaseActivity
+import id.anantyan.challengechapter3.presentation.base.BaseInteraction
+import id.anantyan.challengechapter3.presentation.detail.DetailActivity
 
 class HomeFragment : Fragment(),
     HomeInteraction,
@@ -57,31 +53,25 @@ class HomeFragment : Fragment(),
     private fun bindObserver() {
         viewModel.getAll(false)
 
-        lifecycleScope.launch {
-            viewModel.getAll.collect { resource ->
-                when (resource) {
-                    is Resource.Loading -> {
-                        binding.progressBar.isVisible = true
-                    }
-                    is Resource.Success -> {
-                        binding.progressBar.isVisible = false
-                        adapter.submitList(resource.data)
-                    }
+        viewModel.getAll.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+                is Resource.Success -> {
+                    binding.progressBar.isVisible = false
+                    adapter.submitList(resource.data)
                 }
             }
         }
 
-        lifecycleScope.launch {
-            viewModel.toggleGrid.collect {
-                val spanCount = if (it) 2 else 1
-                binding.rvList.layoutManager = GridLayoutManager(requireContext(), spanCount)
-            }
+        viewModel.toggleGrid.observe(viewLifecycleOwner) {
+            val spanCount = if (it) 2 else 1
+            binding.rvList.layoutManager = GridLayoutManager(requireContext(), spanCount)
         }
 
-        lifecycleScope.launch {
-            viewModel.toggleSort.collect {
-                viewModel.getAll(it)
-            }
+        viewModel.toggleSort.observe(viewLifecycleOwner) {
+            viewModel.getAll(it)
         }
     }
 

@@ -1,4 +1,4 @@
-package id.anantyan.challengechapter3.ui.onboarding
+package id.anantyan.challengechapter3.presentation.onboarding
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
